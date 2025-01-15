@@ -11,8 +11,9 @@ function App() {
   }
 
   const addTask = ()=>{
-    setTasks([...tasks, task]);
-    setTask('');
+    if (task.trim()){
+    setTasks([...tasks, {id : Date.now(), task: task, status : false}]);
+    setTask('');}
   }
   return (
     <div className="App">
@@ -22,12 +23,12 @@ function App() {
           onChange={handleChange}
           placeholder="Enter a task"
         />
-        <button onClick={addTask}>+</button>
+        <button onClick={addTask} >+</button>
       {
 
 
       }
-      <Main tasks={tasks}/>
+      <Main tasks={tasks} setTasks={setTasks}/>
     </div>
   );
 }
