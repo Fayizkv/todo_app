@@ -1,34 +1,40 @@
-import React,{useState} from 'react';
-import Main  from './Main';
+import React, { useState } from 'react';
+import Completed from './Completed';
+import Pending from './Pending';
+import './App.css';
 
 function App() {
-
   const [task, setTask] = useState('');
   const [tasks, setTasks] = useState([]);
 
-  const handleChange = (e)=>{
+  const handleChange = (e) => {
     setTask(e.target.value);
-  }
+  };
 
-  const addTask = ()=>{
-    if (task.trim()){
-    setTasks([...tasks, {id : Date.now(), task: task, status : false}]);
-    setTask('');}
-  }
+  const addTask = () => {
+    if (task.trim()) {
+      setTasks([...tasks, { id: Date.now(), task: task, status: false }]);
+      setTask('');
+    }
+  };
+
   return (
-    <div className="App">
-      <input
+    <div className="app">
+
+      <div className="input">
+        <input
           type="text"
           value={task}
           onChange={handleChange}
           placeholder="Enter a task"
         />
-        <button onClick={addTask} >+</button>
-      {
+        <i onClick={addTask}>+</i>
+      </div>
 
-
-      }
-      <Main tasks={tasks} setTasks={setTasks}/>
+      <div className="todos">
+        <Pending tasks={tasks} setTasks={setTasks} />
+        <Completed tasks={tasks} />
+      </div>
     </div>
   );
 }
